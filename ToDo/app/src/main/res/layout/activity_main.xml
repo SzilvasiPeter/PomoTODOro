@@ -4,151 +4,154 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#DCDCDC"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/tomorrow_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/today_image"
+            app:srcCompat="@drawable/tomorrow" />
 
-            <ImageView
-                android:id="@+id/tomorrow_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/today_image"
-                app:srcCompat="@drawable/tomorrow" />
+        <ImageView
+            android:id="@+id/upcoming_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tomorrow_image"
+            app:srcCompat="@drawable/upcomming" />
 
-            <ImageView
-                android:id="@+id/upcoming_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tomorrow_image"
-                app:srcCompat="@drawable/upcomming" />
+        <TextView
+            android:id="@+id/upcoming_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Upcoming"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/upcoming_image"
+            app:layout_constraintTop_toTopOf="@+id/upcoming_image" />
 
-            <TextView
-                android:id="@+id/upcoming_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Upcoming"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/upcoming_image"
-                app:layout_constraintTop_toTopOf="@+id/upcoming_image" />
+        <TextView
+            android:id="@+id/incoming_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Incoming"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/incoming_image"
+            app:layout_constraintTop_toTopOf="@+id/incoming_image" />
 
-            <TextView
-                android:id="@+id/incoming_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Incoming"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/incoming_image"
-                app:layout_constraintTop_toTopOf="@+id/incoming_image" />
+        <TextView
+            android:id="@+id/today_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:baselineAligned="false"
+            android:gravity="center_vertical"
+            android:text="Today"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/today_image"
+            app:layout_constraintTop_toTopOf="@+id/today_image" />
 
-            <TextView
-                android:id="@+id/today_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:baselineAligned="false"
-                android:gravity="center_vertical"
-                android:text="Today"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/today_image"
-                app:layout_constraintTop_toTopOf="@+id/today_image" />
+        <TextView
+            android:id="@+id/tomorrow_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Tomorrow"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/tomorrow_image"
+            app:layout_constraintTop_toTopOf="@+id/tomorrow_image" />
 
-            <TextView
-                android:id="@+id/tomorrow_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="10dp"
-                android:text="Tomorrow"
-                android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/tomorrow_image"
-                app:layout_constraintTop_toTopOf="@+id/tomorrow_image" />
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="?android:attr/listDivider"
+            android:backgroundTint="@android:color/darker_gray"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@+id/divider2"
+            app:layout_constraintTop_toBottomOf="@+id/upcoming_image"
+            tools:visibility="visible" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:background="?android:attr/listDivider"
-                android:backgroundTint="@android:color/darker_gray"
-                android:visibility="visible"
-                app:layout_constraintEnd_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/upcoming_image"
-                tools:visibility="visible" />
+        <ImageView
+            android:id="@+id/incoming_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/upcoming_image"
+            app:srcCompat="@drawable/inbox" />
 
-            <ImageView
-                android:id="@+id/incoming_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/upcoming_image"
-                app:srcCompat="@drawable/inbox" />
+        <ImageView
+            android:id="@+id/today_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/today" />
 
-            <ImageView
-                android:id="@+id/today_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="40dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/today" />
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintStart_toEndOf="@+id/tomorrow_text"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="10dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintStart_toEndOf="@+id/tomorrow_text"
-                app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/addtask_editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:ems="10"
+            android:hint="Add task to Inbox"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintStart_toStartOf="@+id/divider2"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/addtask_editText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="Add task to Inbox"
-                android:inputType="textPersonName"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/divider2"
-                app:layout_constraintStart_toStartOf="@+id/divider2"
-                app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/simpleTask_textview"
+            android:layout_width="211dp"
+            android:layout_height="19dp"
+            android:layout_marginTop="50dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintTop_toBottomOf="@+id/addtask_editText" />
 
-            <TextView
-                android:id="@+id/simpleTask_textview"
-                android:layout_width="211dp"
-                android:layout_height="19dp"
-                android:layout_marginTop="50dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/divider2"
-                app:layout_constraintTop_toBottomOf="@+id/addtask_editText" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasks_recycleview"
+            android:layout_width="221dp"
+            android:layout_height="549dp"
+            android:layout_marginTop="100dp"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/divider2"
+            app:layout_constraintTop_toBottomOf="@+id/addtask_editText" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
