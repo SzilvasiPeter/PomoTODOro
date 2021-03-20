@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tasklist_linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <RadioButton
+        android:id="@+id/delete_radioButton"
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true" />
+
+    <ImageView
+        android:id="@+id/timerstart_imageview"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/delete_radioButton"
+        app:srcCompat="@android:drawable/ic_media_play" />
+
+    <TextView
+        android:id="@+id/taskname_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="false"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="0dp"
+        android:layout_toEndOf="@+id/timerstart_imageview"
+        android:text="taskname"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/duedata_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="50dp"
+        android:layout_toEndOf="@+id/taskname_textview"
+        android:text="duedata"
+        android:textSize="10sp" />
+</LinearLayout>
