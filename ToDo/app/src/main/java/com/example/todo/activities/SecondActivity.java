@@ -1,4 +1,4 @@
-package com.example.todo;
+package com.example.todo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.todo.R;
+
 public class SecondActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY = "com.example.todo.extra.REPLY";
-    private EditText mReply;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,14 +23,16 @@ public class SecondActivity extends AppCompatActivity {
         String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
         TextView textView = findViewById(R.id.text_message);
         textView.setText(message);
-        mReply = findViewById(R.id.editText_second);
+        myReply = findViewById(R.id.editText_second);
     }
 
     public void returnReply(View view) {
-        String reply = mReply.getText().toString();
+        String reply = myReply.getText().toString();
         Intent replyIntent = new Intent();
         replyIntent.putExtra(EXTRA_REPLY, reply);
         setResult(RESULT_OK, replyIntent);
         finish();
     }
+
+    private EditText myReply;
 }

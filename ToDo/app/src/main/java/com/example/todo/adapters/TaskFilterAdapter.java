@@ -1,4 +1,4 @@
-package com.example.todo;
+package com.example.todo.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +10,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.NumberFormat;
+import com.example.todo.R;
+import com.example.todo.entities.TaskFilter;
+
 import java.util.List;
 
 public class TaskFilterAdapter extends RecyclerView.Adapter<TaskFilterAdapter.TaskFilterViewHolder> {
-
-    private final List<TaskFilter> myTaskFilters;
 
     public TaskFilterAdapter(List<TaskFilter> taskFilters){
         myTaskFilters = taskFilters;
@@ -60,4 +60,6 @@ public class TaskFilterAdapter extends RecyclerView.Adapter<TaskFilterAdapter.Ta
             linearLayout = itemView.findViewById(R.id.taskFilter_linearLayout);
         }
     }
+
+    private final List<TaskFilter> myTaskFilters;
 }

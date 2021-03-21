@@ -1,4 +1,4 @@
-package com.example.todo;
+package com.example.todo.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.todo.R;
+import com.example.todo.entities.Task;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -46,9 +49,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         return myTaskList.size();
     }
 
-    private List<Task> myTaskList;
-    private Context myContext;
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView taskName;
         public TextView dueDate;
@@ -60,4 +60,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
             linearLayout = itemView.findViewById(R.id.tasklist_linearlayout);
         }
     }
+
+    private final List<Task> myTaskList;
+    private final Context myContext;
 }

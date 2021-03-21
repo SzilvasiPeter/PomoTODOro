@@ -1,4 +1,4 @@
-package com.example.todo;
+package com.example.todo.activities;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -7,10 +7,13 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.todo.R;
+import com.example.todo.entities.Task;
+import com.example.todo.adapters.TaskListAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
