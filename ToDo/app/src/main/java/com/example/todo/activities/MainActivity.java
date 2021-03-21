@@ -68,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void launchTaskActivity(View view) {
+        Log.d(LOG_TAG, "Task list button clicked!");
+        Intent intent = new Intent(this, TaskActivity.class);
+        startActivity(intent);
+    }
+
     private final List<TaskFilter> myTaskFilters = new ArrayList<>();
     private TaskFilterAdapter myFilterAdapter;
 

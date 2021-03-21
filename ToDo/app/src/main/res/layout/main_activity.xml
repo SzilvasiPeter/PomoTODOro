@@ -45,6 +45,16 @@
         android:onClick="launchSecondActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/taskList_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="launchTaskActivity"
+        android:text="TASKLIST"
+        app:layout_constraintBottom_toTopOf="@+id/text_header_reply"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <EditText
         android:id="@+id/editText_main"
         android:layout_width="0dp"

@@ -23,6 +23,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.todo.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.TaskActivity"
+            android:label = "Task Activity"
+            android:parentActivityName=".activities.TaskActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.todo.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

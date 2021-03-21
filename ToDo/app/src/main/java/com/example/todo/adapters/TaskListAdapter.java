@@ -38,10 +38,15 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Task taskList = myTaskList.get(position);
         DateFormat dateFormat = new SimpleDateFormat("MM dd", Locale.getDefault());
-        holder.taskName.setText(myTaskList.get(position).getTaskName());
-        holder.dueDate.setText(dateFormat.format(myTaskList.get(position).getDueDate()));
+        holder.taskName.setText(myTaskList.get(position).getMyTaskName());
+        //holder.dueDate.setText(dateFormat.format(myTaskList.get(position).get()));
         holder.linearLayout.setOnClickListener(view ->
-                Toast.makeText(view.getContext(),"click on item: "+taskList.getTaskName(),Toast.LENGTH_LONG).show());
+                Toast.makeText(view.getContext(),"click on item: "+taskList.getMyTaskName(),Toast.LENGTH_LONG).show());
+    }
+
+    public void setTasks(List<Task> tasks){
+        myTaskList = tasks;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -61,6 +66,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         }
     }
 
-    private final List<Task> myTaskList;
+    private List<Task> myTaskList;
     private final Context myContext;
 }

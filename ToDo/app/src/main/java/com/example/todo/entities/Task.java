@@ -1,57 +1,70 @@
 package com.example.todo.entities;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity(tableName = "task_table")
 public class Task {
 
-    public Task(String taskName){
-        this.myTaskName = taskName;
-        this.myPomodoroQuantity = 0;
-        this.myDueDate = new Date(System.currentTimeMillis());
-        this.myIsCompleted = false;
-    }
-
-    public Task(String taskName, int myPomodoroQuantity, Date myDueDate, boolean myIsCompleted) {
-        this.myTaskName = taskName;
+    public Task(int myId, String myTaskName, int myPomodoroQuantity, boolean myIsCompleted) {
+        this.myId = myId;
+        this.myTaskName = myTaskName;
         this.myPomodoroQuantity = myPomodoroQuantity;
-        this.myDueDate = myDueDate;
+        //this.myDueDate = myDueDate.toString();
         this.myIsCompleted = myIsCompleted;
     }
 
-    public String getTaskName() {
+    public int getMyId() {
+        return myId;
+    }
+
+    public void setMyId(int myId) {
+        this.myId = myId;
+    }
+
+    public String getMyTaskName() {
         return myTaskName;
     }
 
-    public void setTaskName(String myTaskName) {
+    public void setMyTaskName(String myTaskName) {
         this.myTaskName = myTaskName;
     }
 
-    public int getPomodoroQuantity() {
+    public int getMyPomodoroQuantity() {
         return myPomodoroQuantity;
     }
 
-    public void setPomodoroQuantity(int myPomodoroQuantity) {
+    public void setMyPomodoroQuantity(int myPomodoroQuantity) {
         this.myPomodoroQuantity = myPomodoroQuantity;
     }
 
-    public Date getDueDate() {
-        return myDueDate;
-    }
-
-    public void setDueDate(Date myDueDate) {
-        this.myDueDate = myDueDate;
-    }
-
-    public boolean isCompleted() {
+    public boolean isMyIsCompleted() {
         return myIsCompleted;
     }
 
-    public void setIsCompleted(boolean myIsCompleted) {
+    public void setMyIsCompleted(boolean myIsCompleted) {
         this.myIsCompleted = myIsCompleted;
     }
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private int myId;
+
+    @ColumnInfo(name = "taskName")
     private String myTaskName;
+
+    @ColumnInfo(name = "pomodoroQuantity")
     private int myPomodoroQuantity;
-    private Date myDueDate;
+
+    //@ColumnInfo(name = "dueDate")
+    //private Date myDueDate;
+
+    //@ColumnInfo(name = "dueDate")
+    //private String myDueDate;
+
+    @ColumnInfo(name = "isCompleted")
     private boolean myIsCompleted;
 }
