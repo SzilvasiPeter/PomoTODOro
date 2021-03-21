@@ -34,7 +34,7 @@ public class TaskFilterAdapter extends RecyclerView.Adapter<TaskFilterAdapter.Ta
         TaskFilter model = myTaskFilters.get(position);
 
         holder.taskFilterName.setText(model.getTaskFilterName());
-        holder.taskFilterHour.setText(String.valueOf(model.getNumberOfHour()));
+        holder.taskFilterHour.setText(String.format("%sh", model.getNumberOfHour()));
         holder.taskFilterPomodoro.setText(String.valueOf(model.getNumberOfPomodoro()));
         holder.linearLayout.setOnClickListener(view ->
                 Toast.makeText(view.getContext(),"click on item: "+ model.getTaskFilterName(),Toast.LENGTH_LONG).show());
