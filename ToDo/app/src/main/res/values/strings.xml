@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ToDo</string>
+    <string name="taskFilterName">TaskFilterName</string>
+    <string name="filterHours">0.0</string>
+    <string name="filterImage">FilterImage</string>
+    <string name="filterPomodoro">0</string>
 </resources>
