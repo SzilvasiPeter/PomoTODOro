@@ -1,11 +1,9 @@
 package com.example.todo.activities;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,7 +18,6 @@ import com.example.todo.adapters.TaskListAdapter;
 import com.example.todo.viewmodels.TaskViewModel;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TaskActivity extends AppCompatActivity{
@@ -51,6 +48,16 @@ public class TaskActivity extends AppCompatActivity{
             }
         });
 
+        myTaskEditText = findViewById(R.id.task_editText);
+
+        final Button button = findViewById(R.id.save_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Task word = new Task(0, myTaskEditText.getText().toString(), 0, false);
+                myTaskViewModel.insert(word);
+            }
+        });
+
         //EditText addEditText = (EditText) findViewById(R.id.addtask_editText);
         //addEditText.setOnKeyListener(this);
     }
@@ -78,5 +85,7 @@ public class TaskActivity extends AppCompatActivity{
 
     private final List<Task> myTasks = new ArrayList<>();
     private TaskListAdapter myAdapter;
+
+    private  EditText myTaskEditText;
 
 }

@@ -32,5 +32,4 @@
                 android:value="com.example.todo.activities.MainActivity" />
         </activity>
     </application>
-
 </manifest>

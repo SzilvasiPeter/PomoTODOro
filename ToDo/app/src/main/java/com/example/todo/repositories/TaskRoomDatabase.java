@@ -40,8 +40,6 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
         @Override
         public void onOpen (@NonNull SupportSQLiteDatabase db){
             super.onOpen(db);
-            // If you want to keep the data through app restarts,
-            // comment out the following line.
             new PopulateDbAsync(INSTANCE).execute();
         }
     };
@@ -58,11 +56,11 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(final Void... params) {
             // Start the app with a clean database every time.
-            // Not needed if you only populate on creation.
             mDao.deleteAll();
 
             for( int i = 0; i <= tasks.length - 1; i++) {
-                Task task = new Task(i+1, tasks[i], 0, false);
+                // ID is 0, because it will be auto-generated
+                Task task = new Task(0, tasks[i], 0, false);
                 mDao.insert(task);
             }
             return null;
