@@ -49,6 +49,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         notifyDataSetChanged();
     }
 
+    public Task getTaskAtPosition(int position) {
+        return myTaskList.get(position);
+    }
+
     @Override
     public int getItemCount() {
         return myTaskList.size();

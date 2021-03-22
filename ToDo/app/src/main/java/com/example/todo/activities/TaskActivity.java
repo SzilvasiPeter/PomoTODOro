@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,13 +52,53 @@ public class TaskActivity extends AppCompatActivity{
 
         myTaskEditText = findViewById(R.id.task_editText);
 
-        final Button button = findViewById(R.id.save_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button addButton = findViewById(R.id.save_button);
+        addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Task word = new Task(0, myTaskEditText.getText().toString(), 0, false);
                 myTaskViewModel.insert(word);
             }
         });
+
+        final Button clearAllButton = findViewById(R.id.clearAll_button);
+        clearAllButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Clearing the data...", Toast.LENGTH_SHORT).show();
+
+                // Delete the existing data
+                myTaskViewModel.deleteAll();
+            }
+        });
+
+        // Add the functionality to swipe items in the
+        // recycler view to delete that item
+        ItemTouchHelper helper = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(0,
+                        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+                    @Override
+                    // We are not implementing onMove() in this app
+                    public boolean onMove(RecyclerView recyclerView,
+                                          RecyclerView.ViewHolder viewHolder,
+                                          RecyclerView.ViewHolder target) {
+                        return false;
+                    }
+
+                    @Override
+                    // When the use swipes a word,
+                    // delete that word from the database.
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                        int position = viewHolder.getAdapterPosition();
+                        Task myWord = myAdapter.getTaskAtPosition(position);
+                        Toast.makeText(TaskActivity.this,
+                                 "Task is deleted on swipe:  " +
+                                        myWord.getMyTaskName(), Toast.LENGTH_LONG).show();
+
+                        // Delete the word
+                        myTaskViewModel.deleteTask(myWord);
+                    }
+                });
+        // Attach the item touch helper to the recycler view
+        helper.attachToRecyclerView(recyclerView);
 
         //EditText addEditText = (EditText) findViewById(R.id.addtask_editText);
         //addEditText.setOnKeyListener(this);

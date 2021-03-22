@@ -24,8 +24,6 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             TaskRoomDatabase.class, "task_database")
                             // Wipes and rebuilds instead of migrating
-                            // if no Migration object.
-                            // Migration is not part of this practical.
                             .fallbackToDestructiveMigration()
                             .addCallback(myRoomDatabaseCallback)
                             .build();
@@ -46,22 +44,24 @@ public abstract class TaskRoomDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final TaskDao mDao;
+        private final TaskDao myDao;
         String [] tasks = {"firstTask", "secondTask", "thirdTask"};
 
         public PopulateDbAsync(TaskRoomDatabase db) {
-            mDao = db.taskDao();
+            myDao = db.taskDao();
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
             // Start the app with a clean database every time.
-            mDao.deleteAll();
+            myDao.deleteAll();
 
-            for( int i = 0; i <= tasks.length - 1; i++) {
-                // ID is 0, because it will be auto-generated
-                Task task = new Task(0, tasks[i], 0, false);
-                mDao.insert(task);
+            if(myDao.getAnyTask().length < 1) {
+                for (int i = 0; i <= tasks.length - 1; i++) {
+                    // ID is 0, because it will be auto-generated
+                    Task task = new Task(0, tasks[i], 0, false);
+                    myDao.insert(task);
+                }
             }
             return null;
         }
