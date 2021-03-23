@@ -80,4 +80,5 @@ public class MainActivity extends AppCompatActivity {
     private EditText myMessageEditText;
     private TextView myReplyHeadTextView;
     private TextView myReplyTextView;
+
 }

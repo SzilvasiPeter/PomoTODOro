@@ -1,5 +1,6 @@
 package com.example.todo.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -104,6 +105,11 @@ public class TaskActivity extends AppCompatActivity{
         //addEditText.setOnKeyListener(this);
     }
 
+    public void launchTimer(View view) {
+        Intent intent = new Intent(this, TimerActivity.class);
+        startActivity(intent);
+    }
+
     /*@Override
     public boolean onKey(View view, int keyCode, KeyEvent event) {
 
@@ -129,5 +135,4 @@ public class TaskActivity extends AppCompatActivity{
     private TaskListAdapter myAdapter;
 
     private  EditText myTaskEditText;
-
 }

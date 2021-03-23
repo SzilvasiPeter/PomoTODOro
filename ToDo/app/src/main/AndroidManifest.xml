@@ -12,12 +12,13 @@
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.SecondActivity"
-            android:label = "Second Activity"
+            android:label="Second Activity"
             android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -25,11 +26,20 @@
         </activity>
         <activity
             android:name=".activities.TaskActivity"
-            android:label = "Task Activity"
-            android:parentActivityName=".activities.TaskActivity">
+            android:label="Task Activity"
+            android:parentActivityName=".activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.todo.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".activities.TimerActivity"
+            android:label="Timer Activity"
+            android:parentActivityName=".activities.TaskActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.todo.activities.TaskActivity" />
+        </activity>
     </application>
+
 </manifest>
