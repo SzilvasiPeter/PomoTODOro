@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DCDCDC"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.TaskActivity">
 
     <EditText
         android:id="@+id/task_editText"
@@ -47,15 +47,15 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addTask_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/timer_imageButton"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
         android:contentDescription="Add task"
         android:onClick="launchTimer"
-        android:src="@drawable/ic_baseline_add_circle_outline_24"
+        android:src="@android:drawable/ic_lock_idle_alarm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
