@@ -32,7 +32,7 @@ public class TimerActivity extends AppCompatActivity {
         myTimerNumberPicker.setMinValue(0);
         myTimerNumberPicker.setMaxValue(60);
         myTimerNumberPicker.setDisplayedValues(timerTimes);
-        myTimerNumberPicker.setOnValueChangedListener((numberPicker, i, i1) -> myPickedNumber = numberPicker.getValue());
+        myTimerNumberPicker.setOnValueChangedListener((numberPicker, i, i1) -> myPickedNumber = numberPicker.getValue() + 1);
     }
 
     public void startTimer(View view) {
