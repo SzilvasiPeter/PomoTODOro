@@ -23,22 +23,35 @@ public class TimerActivity extends AppCompatActivity {
         myTimerTextView = findViewById(R.id.timer_textView);
         myTimerButton = findViewById(R.id.timer_button);
 
-        String[] timerTimes = new String[60];
+        String[] secondsValue = new String[60];
         for (int i = 0; i < 60; i++){
-            timerTimes[i] = String.valueOf(i+1);
+            secondsValue[i] = String.valueOf(i);
         }
 
-        myTimerNumberPicker = findViewById(R.id.timer_numberPicker);
-        myTimerNumberPicker.setMinValue(0);
-        myTimerNumberPicker.setMaxValue(60);
-        myTimerNumberPicker.setDisplayedValues(timerTimes);
-        myTimerNumberPicker.setOnValueChangedListener((numberPicker, i, i1) -> myPickedNumber = numberPicker.getValue() + 1);
+        mySecondsTimerNumberPicker = findViewById(R.id.timerSeconds_numberPicker);
+        mySecondsTimerNumberPicker.setMinValue(0);
+        mySecondsTimerNumberPicker.setMaxValue(59);
+        mySecondsTimerNumberPicker.setDisplayedValues(secondsValue);
+        mySecondsTimerNumberPicker.setOnValueChangedListener((numberPicker, i, i1) -> mySecondsTimerNumber = numberPicker.getValue());
+
+        String[] minutesValues = new String[61];
+        for (int i = 0; i < 61; i++){
+            minutesValues[i] = String.valueOf(i);
+        }
+
+        myMinutesTimerNumberPicker = findViewById(R.id.timerMinutes_numberPicker);
+        myMinutesTimerNumberPicker.setMinValue(0);
+        myMinutesTimerNumberPicker.setMaxValue(60);
+        myMinutesTimerNumberPicker.setValue(25);
+        myMinutesTimerNumberPicker.setDisplayedValues(minutesValues);
+        myMinutesTimerNumberPicker.setOnValueChangedListener((numberPicker, i, i1) -> myMinutesTimerNumber = numberPicker.getValue());
     }
 
     public void startTimer(View view) {
         myTimerButton.setEnabled(false);
-        myTimerNumberPicker.setVisibility(View.INVISIBLE);
-        new CountDownTimer(myPickedNumber*1000, 1000) {
+        mySecondsTimerNumberPicker.setVisibility(View.INVISIBLE);
+        myMinutesTimerNumberPicker.setVisibility(View.INVISIBLE);
+        new CountDownTimer((myMinutesTimerNumber * 1000 * 60) + (mySecondsTimerNumber * 1000), 1000) {
 
             public void onTick(long millisUntilFinished) {
                 long seconds = 0;
@@ -55,13 +68,16 @@ public class TimerActivity extends AppCompatActivity {
             public void onFinish() {
                 myTimerTextView.setText("Done!");
                 myTimerButton.setEnabled(true);
-                myTimerNumberPicker.setVisibility(View.VISIBLE);
+                mySecondsTimerNumberPicker.setVisibility(View.VISIBLE);
+                myMinutesTimerNumberPicker.setVisibility(View.VISIBLE);
             }
         }.start();
     }
 
     private TextView myTimerTextView;
     private Button myTimerButton;
-    private NumberPicker myTimerNumberPicker;
-    private int myPickedNumber;
+    private NumberPicker mySecondsTimerNumberPicker;
+    private NumberPicker myMinutesTimerNumberPicker;
+    private int mySecondsTimerNumber;
+    private int myMinutesTimerNumber = 25;
 }
