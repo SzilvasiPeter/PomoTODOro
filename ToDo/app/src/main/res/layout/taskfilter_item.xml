@@ -19,7 +19,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/filterImage"
-            app:srcCompat="@drawable/today" />
+            app:srcCompat="@android:drawable/presence_invisible" />
 
         <TextView
             android:id="@+id/taskFilter_textView"
@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
+            android:layout_marginEnd="70dp"
             android:text="@string/taskFilterName" />
 
         <TextView
@@ -34,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="21dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="60dp"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:text="@string/filterHours" />
 
@@ -43,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginStart="20dp"
+            android:layout_marginRight="0dp"
             android:layout_weight="1"
             android:text="@string/filterPomodoro" />
 

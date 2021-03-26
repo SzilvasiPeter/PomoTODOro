@@ -58,7 +58,8 @@ public class TimerActivity extends AppCompatActivity {
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
                 if(minutes == 0){
                     seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
-                }else{
+                }
+                else{
                     seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - (minutes * 60);
                 }
 
