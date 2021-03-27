@@ -43,32 +43,25 @@ public class TaskActivity extends AppCompatActivity{
         // Get a new or existing ViewModel from the ViewModelProvider.
         TaskViewModel myTaskViewModel = ViewModelProviders.of(this).get(TaskViewModel.class);
 
-        myTaskViewModel.getAllTasks().observe(this, new Observer<List<Task>>() {
-            @Override
-            public void onChanged(@Nullable final List<Task> tasks) {
-                // Update the cached copy of the tasks in the adapter.
-                myAdapter.setTasks(tasks);
-            }
+        myTaskViewModel.getAllTasks().observe(this, tasks -> {
+            // Update the cached copy of the tasks in the adapter.
+            myAdapter.setTasks(tasks);
         });
 
         myTaskEditText = findViewById(R.id.task_editText);
 
         final Button addButton = findViewById(R.id.save_button);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Task word = new Task(0, myTaskEditText.getText().toString(), 0, false);
-                myTaskViewModel.insert(word);
-            }
+        addButton.setOnClickListener(view -> {
+            Task word = new Task(0, myTaskEditText.getText().toString(), 0, false);
+            myTaskViewModel.insert(word);
         });
 
         final Button clearAllButton = findViewById(R.id.clearAll_button);
-        clearAllButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Clearing the data...", Toast.LENGTH_SHORT).show();
+        clearAllButton.setOnClickListener(view -> {
+            Toast.makeText(view.getContext(), "Clearing the tasks...", Toast.LENGTH_SHORT).show();
 
-                // Delete the existing data
-                myTaskViewModel.deleteAll();
-            }
+            // Delete the existing data
+            myTaskViewModel.deleteAll();
         });
 
         // Add the functionality to swipe items in the
@@ -100,36 +93,12 @@ public class TaskActivity extends AppCompatActivity{
                 });
         // Attach the item touch helper to the recycler view
         helper.attachToRecyclerView(recyclerView);
-
-        //EditText addEditText = (EditText) findViewById(R.id.addtask_editText);
-        //addEditText.setOnKeyListener(this);
     }
 
     public void launchTimer(View view) {
         Intent intent = new Intent(this, TimerActivity.class);
         startActivity(intent);
     }
-
-    /*@Override
-    public boolean onKey(View view, int keyCode, KeyEvent event) {
-
-        TextView responseText = findViewById(R.id.simpleTask_textview);
-        EditText myEditText = (EditText) view;
-
-        if (keyCode == EditorInfo.IME_ACTION_SEARCH ||
-                keyCode == EditorInfo.IME_ACTION_DONE ||
-                event.getAction() == KeyEvent.ACTION_DOWN &&
-                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-
-            responseText.setText(myEditText.getText());
-
-            myTasks.add(new Task(myEditText.getText().toString(), 0, new Date(System.currentTimeMillis()), false));
-            myAdapter.notifyItemInserted(myTasks.size() - 1);
-            myEditText.setText("");
-            return true;
-        }
-        return false;
-    }*/
 
     private final List<Task> myTasks = new ArrayList<>();
     private TaskListAdapter myAdapter;

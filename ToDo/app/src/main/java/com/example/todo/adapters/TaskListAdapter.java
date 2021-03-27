@@ -1,18 +1,24 @@
 package com.example.todo.adapters;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.todo.R;
 import com.example.todo.entities.Task;
+import com.example.todo.viewmodels.TaskViewModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,6 +30,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     public TaskListAdapter(Context context, List<Task> taskList){
         myContext = context;
         myTaskList = taskList;
+        myTaskViewModel = ViewModelProviders.of((FragmentActivity)context).get(TaskViewModel.class);
     }
 
     @NonNull
@@ -40,6 +47,11 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
         DateFormat dateFormat = new SimpleDateFormat("MM dd", Locale.getDefault());
         holder.taskName.setText(myTaskList.get(position).getMyTaskName());
         //holder.dueDate.setText(dateFormat.format(myTaskList.get(position).get()));
+        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if(isChecked) {
+                myTaskViewModel.deleteTask(taskList);
+            }
+        });
         holder.linearLayout.setOnClickListener(view ->
                 Toast.makeText(view.getContext(),"click on item: "+taskList.getMyTaskName(),Toast.LENGTH_LONG).show());
     }
@@ -61,15 +73,18 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView taskName;
         public TextView dueDate;
+        public CheckBox checkBox;
         public LinearLayout linearLayout;
         public ViewHolder(View itemView) {
             super(itemView);
             this.taskName = itemView.findViewById(R.id.taskname_textview);
             this.dueDate = itemView.findViewById(R.id.duedata_textview);
-            linearLayout = itemView.findViewById(R.id.tasklist_linearlayout);
+            this.checkBox = itemView.findViewById(R.id.delete_radioButton);
+            this.linearLayout = itemView.findViewById(R.id.tasklist_linearlayout);
         }
     }
 
     private List<Task> myTaskList;
     private final Context myContext;
+    private final TaskViewModel myTaskViewModel;
 }
