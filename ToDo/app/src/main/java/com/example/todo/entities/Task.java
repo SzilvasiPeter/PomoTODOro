@@ -9,11 +9,11 @@ import java.util.Date;
 @Entity(tableName = "task_table")
 public class Task {
 
-    public Task(int myId, String myTaskName, int myPomodoroQuantity, boolean myIsCompleted) {
+    public Task(int myId, String myTaskName, int myPomodoroQuantity, Date myDueDate, boolean myIsCompleted) {
         this.myId = myId;
         this.myTaskName = myTaskName;
         this.myPomodoroQuantity = myPomodoroQuantity;
-        //this.myDueDate = myDueDate.toString();
+        this.myDueDate = myDueDate;
         this.myIsCompleted = myIsCompleted;
     }
 
@@ -41,6 +41,14 @@ public class Task {
         this.myPomodoroQuantity = myPomodoroQuantity;
     }
 
+    public Date getMyDueDate() {
+        return myDueDate;
+    }
+
+    public void setMyDueDate(Date myDueDate) {
+        this.myDueDate = myDueDate;
+    }
+
     public boolean isMyIsCompleted() {
         return myIsCompleted;
     }
@@ -59,11 +67,8 @@ public class Task {
     @ColumnInfo(name = "pomodoroQuantity")
     private int myPomodoroQuantity;
 
-    //@ColumnInfo(name = "dueDate")
-    //private Date myDueDate;
-
-    //@ColumnInfo(name = "dueDate")
-    //private String myDueDate;
+    @ColumnInfo(name = "dueDate")
+    private Date myDueDate;
 
     @ColumnInfo(name = "isCompleted")
     private boolean myIsCompleted;

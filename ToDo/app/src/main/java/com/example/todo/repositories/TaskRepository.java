@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.todo.entities.Task;
 import com.example.todo.entities.TaskDao;
 
+import java.util.Date;
 import java.util.List;
 
 public class TaskRepository {
@@ -22,16 +23,22 @@ public class TaskRepository {
         return myAllTasks;
     }
 
+    public LiveData<List<Task>> getTaskFromDate(Date fromDate) {
+        return myTaskDao.getTaskFromDate(fromDate);
+    }
+
     public void insert (Task task) {
         new insertAsyncTask(myTaskDao).execute(task);
     }
+
+    public void updateTask(Task task){ new updateTaskAsyncTask(myTaskDao).execute(task); }
 
     public void deleteAll()  {
         new deleteAllTasksAsyncTask(myTaskDao).execute();
     }
 
-    public void deleteTask(Task word)  {
-        new deleteTaskAsyncTask(myTaskDao).execute(word);
+    public void deleteTask(Task task)  {
+        new deleteTaskAsyncTask(myTaskDao).execute(task);
     }
 
     private static class insertAsyncTask extends AsyncTask<Task, Void, Void> {
@@ -66,13 +73,27 @@ public class TaskRepository {
     private static class deleteTaskAsyncTask extends AsyncTask<Task, Void, Void> {
         private TaskDao mAsyncTaskDao;
 
-        deleteTaskAsyncTask(TaskDao dao) {
+        public deleteTaskAsyncTask(TaskDao dao) {
             mAsyncTaskDao = dao;
         }
 
         @Override
         protected Void doInBackground(final Task... params) {
             mAsyncTaskDao.deleteTask(params[0]);
+            return null;
+        }
+    }
+
+    private static class updateTaskAsyncTask extends AsyncTask<Task, Void, Void> {
+        private TaskDao mAsyncTaskDao;
+
+        public updateTaskAsyncTask(TaskDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Task... params) {
+            mAsyncTaskDao.updateTask(params[0]);
             return null;
         }
     }

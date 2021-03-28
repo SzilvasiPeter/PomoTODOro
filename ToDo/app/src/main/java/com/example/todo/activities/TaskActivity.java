@@ -7,9 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,6 +19,7 @@ import com.example.todo.adapters.TaskListAdapter;
 import com.example.todo.viewmodels.TaskViewModel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TaskActivity extends AppCompatActivity{
@@ -29,10 +28,6 @@ public class TaskActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.task_activity);
-
-        /*myTasks.add(new Task("1st Task", 1, new Date(System.currentTimeMillis()), false));
-        myTasks.add(new Task("2st Task", 2, new Date(System.currentTimeMillis()), false));
-        myTasks.add(new Task("3st Task", 3, new Date(System.currentTimeMillis()), false));*/
 
         RecyclerView recyclerView = findViewById(R.id.task_recycleViewer);
         myAdapter = new TaskListAdapter(this, myTasks);
@@ -52,7 +47,7 @@ public class TaskActivity extends AppCompatActivity{
 
         final Button addButton = findViewById(R.id.save_button);
         addButton.setOnClickListener(view -> {
-            Task word = new Task(0, myTaskEditText.getText().toString(), 0, false);
+            Task word = new Task(0, myTaskEditText.getText().toString(), 0, new Date(System.currentTimeMillis()), false);
             myTaskViewModel.insert(word);
         });
 

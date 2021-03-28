@@ -1,7 +1,7 @@
 package com.example.todo.adapters;
 
 import android.content.Context;
-import android.os.Handler;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,23 +37,29 @@ public class TaskListAdapter extends RecyclerView.Adapter<TaskListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(myContext);
-        View listItem= layoutInflater.inflate(R.layout.tasklist_item, parent, false);
+        View listItem = layoutInflater.inflate(R.layout.tasklist_item, parent, false);
         return new ViewHolder(listItem);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Task taskList = myTaskList.get(position);
+        final Task currentTask = myTaskList.get(position);
         DateFormat dateFormat = new SimpleDateFormat("MM dd", Locale.getDefault());
+
         holder.taskName.setText(myTaskList.get(position).getMyTaskName());
-        //holder.dueDate.setText(dateFormat.format(myTaskList.get(position).get()));
-        holder.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(isChecked) {
-                myTaskViewModel.deleteTask(taskList);
-            }
+        holder.dueDate.setText(dateFormat.format(myTaskList.get(position).getMyDueDate()));
+
+        holder.checkBox.setChecked(currentTask.isMyIsCompleted());
+        holder.checkBox.setTag(position);
+        holder.checkBox.setOnClickListener(v -> {
+            Integer pos = (Integer) holder.checkBox.getTag();
+            myTaskList.get(pos).setMyIsCompleted(!myTaskList.get(pos).isMyIsCompleted());
+
+            currentTask.setMyIsCompleted(myTaskList.get(pos).isMyIsCompleted());
+            myTaskViewModel.updateTask(currentTask);
         });
         holder.linearLayout.setOnClickListener(view ->
-                Toast.makeText(view.getContext(),"click on item: "+taskList.getMyTaskName(),Toast.LENGTH_LONG).show());
+                Toast.makeText(view.getContext(),"id:" + currentTask.getMyId() + " taskName: "+currentTask.getMyTaskName() + " isCompleted: " + currentTask.isMyIsCompleted(),Toast.LENGTH_LONG).show());
     }
 
     public void setTasks(List<Task> tasks){
