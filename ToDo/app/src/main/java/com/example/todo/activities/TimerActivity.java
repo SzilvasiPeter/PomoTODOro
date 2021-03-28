@@ -21,7 +21,10 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.timer_activity);
 
         myTimerTextView = findViewById(R.id.timer_textView);
-        myTimerButton = findViewById(R.id.timer_button);
+        myStartButton = findViewById(R.id.timer_button);
+        myPauseButton = findViewById(R.id.pause_button);
+        myContinueButton = findViewById(R.id.continue_button);
+        myStopButton = findViewById(R.id.stop_button);
 
         String[] secondsValue = new String[60];
         for (int i = 0; i < 60; i++){
@@ -48,37 +51,100 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     public void startTimer(View view) {
-        myTimerButton.setEnabled(false);
+        myStartButton.setVisibility(View.INVISIBLE);
         mySecondsTimerNumberPicker.setVisibility(View.INVISIBLE);
         myMinutesTimerNumberPicker.setVisibility(View.INVISIBLE);
-        new CountDownTimer((myMinutesTimerNumber * 1000 * 60) + (mySecondsTimerNumber * 1000), 1000) {
+        myPauseButton.setVisibility(View.VISIBLE);
+
+        myIsPaused = false;
+        myIsCanceled = false;
+
+        long millisInFuture = (myMinutesTimerNumber * 1000 * 60) + (mySecondsTimerNumber * 1000);
+        long countDownInterval = 1000;
+        CountDownTimer countDownTimer = createCountDownTimer(millisInFuture, countDownInterval);
+        countDownTimer.start();
+    }
+
+    public void pauseTimer(View view){
+        myPauseButton.setVisibility(View.INVISIBLE);
+        myContinueButton.setVisibility(View.VISIBLE);
+        myStopButton.setVisibility(View.VISIBLE);
+
+        myIsPaused = true;
+    }
+
+    public void continueTimer(View view){
+        myContinueButton.setVisibility(View.INVISIBLE);
+        myStopButton.setVisibility(View.INVISIBLE);
+        myPauseButton.setVisibility(View.VISIBLE);
+
+        myIsPaused = false;
+        myIsCanceled = false;
+
+        long millisInFuture = myTimeRemaining;
+        long countDownInterval = 1000;
+        CountDownTimer countDownTimer = createCountDownTimer(millisInFuture, countDownInterval);
+        countDownTimer.start();
+    }
+
+    public void stopTimer(View view){
+        myStopButton.setVisibility(View.INVISIBLE);
+        myContinueButton.setVisibility(View.INVISIBLE);
+        myStartButton.setVisibility(View.VISIBLE);
+        myMinutesTimerNumberPicker.setVisibility(View.VISIBLE);
+        mySecondsTimerNumberPicker.setVisibility(View.VISIBLE);
+
+        myIsCanceled = true;
+
+        myTimerTextView.setText("Timer is stopped!");
+    }
+
+    private CountDownTimer createCountDownTimer(long millisInFuture, long countDownInterval){
+        return new CountDownTimer(millisInFuture, countDownInterval) {
 
             public void onTick(long millisUntilFinished) {
-                long seconds = 0;
-                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
-                if(minutes == 0){
-                    seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+                if(myIsPaused || myIsCanceled){
+                    cancel();
                 }
-                else{
-                    seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - (minutes * 60);
+                else {
+                    setTimerText(millisUntilFinished);
+                    myTimeRemaining = millisUntilFinished;
                 }
-
-                myTimerTextView.setText(minutes + ":" + seconds);
             }
 
             public void onFinish() {
                 myTimerTextView.setText("Done!");
-                myTimerButton.setEnabled(true);
+                myPauseButton.setVisibility(View.INVISIBLE);
+                myStartButton.setVisibility(View.VISIBLE);
                 mySecondsTimerNumberPicker.setVisibility(View.VISIBLE);
                 myMinutesTimerNumberPicker.setVisibility(View.VISIBLE);
             }
-        }.start();
+        };
+    }
+
+    private void setTimerText(long millisUntilFinished) {
+        long seconds = 0;
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+        if (minutes == 0) {
+            seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished);
+        } else {
+            seconds = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - (minutes * 60);
+        }
+
+        myTimerTextView.setText(minutes + ":" + seconds);
     }
 
     private TextView myTimerTextView;
-    private Button myTimerButton;
+    private Button myStartButton;
+    private Button myPauseButton;
+    private Button myContinueButton;
+    private Button myStopButton;
     private NumberPicker mySecondsTimerNumberPicker;
     private NumberPicker myMinutesTimerNumberPicker;
+
     private int mySecondsTimerNumber;
     private int myMinutesTimerNumber = 25;
+    private boolean myIsPaused = false;
+    private boolean myIsCanceled = false;
+    private long myTimeRemaining = 0;
 }
