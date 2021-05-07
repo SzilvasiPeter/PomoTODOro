@@ -1,3 +1,3 @@
 # PomoTODOro
 
-Application for tacking To-Do list. It is combined with timer to track each task duration.
+Application for tracking To-Do list. It is combined with timer to track each task duration.
